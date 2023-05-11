@@ -1,0 +1,29 @@
+apt install linux-generic-hwe-<LTS_VERSION>
+useradd -m -d /home/user user
+passwd user
+usermod -a -G sudo user
+apt install zsh zip unzip avahi-daemon
+sudo apt remove --purge snapd
+sudo rm -rf /usr/local/*
+echo 'PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"' >/etc/environment
+chsh -s /bin/zsh
+copy /etc/zsh/zshrc
+
+sudo vi /etc/ssh/sshd_config
+    PermitRootLogin no
+sudo systemctl restart sshd
+sudo chmod -x /etc/update-motd.d/*
+sudo rm /etc/update-motd.d/50-landscape-sysinfo
+
+sudo apt install samba cifs-utils apache2
+sudo systemctl disable smbd
+sudo systemctl disable apache2
+
+sudo sh -c "echo LANG=en_US.UTF-8 >/etc/default/locale"
+timedatectl list-timezones
+sudo timedatectl set-timezone <timezone>
+
+#reset /etc/apt/sources.list # http://archive.ubuntu.com/ubuntu
+
+ssh-copy-id -i ~/.ssh/id_rsa.pub user@host
+rsync -var --progress --delete <SRC> <DEST>
