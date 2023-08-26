@@ -5,9 +5,8 @@ xterm-256color: sitm=\E[3m, ritm=\E[23m,
 https://ftp.gnu.org/gnu/screen/
 sed -i.0 -e '194s|define|undef|g' -e '201s|.*|#undef LOGINDEFAULT|g' -e '217s|.*|#undef LOGOUTOK|g' acconfig.h
 ./autogen.sh [on unx]
-./configure --enable-colors256 --enable-telnet --enable-rxvt_osc CFLAGS="$CFLAGS -Wno-implicit-function-declaration"
+./configure --enable-colors256 --enable-telnet --enable-rxvt_osc --prefix=/usr/local CFLAGS="$CFLAGS -Wno-implicit-function-declaration"
 sed -i.0 -e '120s|.*|#include <TargetConditionals.h>\n#include <vproc.h>\n#include <err.h>\n|g' -e '1058s|.*|else if (!multi \&\& real_uid == eff_uid) {\nstatic char DarwinSockDir[PATH_MAX];\nif (confstr(_CS_DARWIN_USER_TEMP_DIR, DarwinSockDir, sizeof(DarwinSockDir))) {\nstrlcat(DarwinSockDir, ".screen", sizeof(DarwinSockDir));\nSockDir = DarwinSockDir;\n}\n}\n|g' -e "1334s|.*|if (_vprocmgr_detach_from_console(0) != NULL)\nerrx(1, \"can't detach from console\");\n|g" screen.c
-sed -i.0 -e '1422d' socket.c
 sed -i.0 -e '35s|.*|&\n#include <unistd.h>|g' -e "1485s|.*|extern char *LoginName;\nstatic int run_login(const char *path, char *const argv[], char *const envp[])\n{\nconst char *shargs[MAXARGS + 1 + 3];\nconst char **fp, **tp;\nif (access(path, X_OK) < 0)\nreturn -1;\nshargs[0] = \"login\";\nshargs[1] = (*argv[0] == '-') ? \"-pfq\" : \"-pflq\";\nshargs[2] = LoginName;\nshargs[3] = path;\nfp = (const char **)argv + 1;\ntp = shargs + 4;\nwhile ((*tp++ = *fp++) != NULL) {}\nreturn (execve(\"/usr/bin/login\", (char *const*)shargs, envp));\n}\n#define execve run_login\n#undef HAVE_EXECVPE\n|g" window.c
 
 screen.xterm-256color|GNU Screen with xterm using 256 colors,
