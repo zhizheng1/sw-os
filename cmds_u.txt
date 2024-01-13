@@ -1,3 +1,9 @@
+[zsh]
+https://zsh.sourceforge.io
+
+./configure --prefix=/usr --with-tcsetpgrp --enable-multibyte --enable-unicode9 --enable-max-function-depth=700
+copy /etc/zshrc
+
 [screen]
 https://ftp.gnu.org/gnu/screen/
 sed -i.0 -e '195s|define|undef|g' -e '202s|.*|#undef LOGINDEFAULT|g' -e '218s|.*|#undef LOGOUTOK|g' config.h.in
@@ -12,6 +18,6 @@ sudo rm /etc/screenrc
 
 [vim]
 https://github.com/vim/vim
-./configure --with-features=normal --enable-gui=no --with-x=no --enable-cscope --enable-terminal --disable-selinux --disable-nls --with-tlib=ncurses --with-compiledby=root@linux
+./configure --prefix=/usr --with-features=normal --enable-gui=no --with-x=no --enable-cscope --enable-terminal --disable-selinux --disable-nls --disable-xattr --with-tlib=ncurses --with-compiledby=root@linux
 ln -sf vim vi
 export VIM=~/.local/share/vim
