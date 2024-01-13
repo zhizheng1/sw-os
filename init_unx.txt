@@ -2,12 +2,10 @@ apt install linux-generic-hwe-<LTS_VERSION>
 useradd -m -d /home/user user
 passwd user
 usermod -a -G sudo user
-apt install zsh zip unzip avahi-daemon
+apt install zip unzip avahi-daemon
 sudo apt remove --purge snapd
 sudo rm -rf /usr/local/*
 echo 'PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"' >/etc/environment
-chsh -s /bin/zsh
-copy /etc/zsh/zshrc
 
 sudo vi /etc/ssh/sshd_config
     PermitRootLogin no
