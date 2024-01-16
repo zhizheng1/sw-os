@@ -4,6 +4,11 @@ https://zsh.sourceforge.io
 ./configure --prefix=/usr --with-tcsetpgrp --enable-multibyte --enable-unicode9 --enable-max-function-depth=700
 copy /etc/zshrc
 
+[coreutils]
+https://www.gnu.org/software/coreutils/
+https://formulae.brew.sh/api/formula/coreutils.json
+curl -L -H "Authorization: Bearer QQ==" *
+
 [screen]
 https://ftp.gnu.org/gnu/screen/
 sed -i.0 -e '195s|define|undef|g' -e '202s|.*|#undef LOGINDEFAULT|g' -e '218s|.*|#undef LOGOUTOK|g' config.h.in
