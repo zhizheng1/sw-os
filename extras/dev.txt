@@ -3,7 +3,7 @@ pkgutil --expand-full <pkg> <dir>, combine tools and SDK
 cd usr/bin; mv gcc gcc.0; ln -sf clang gcc; cd ../..
 cd Library/Frameworks/Python3.framework/Versions/3.9; mv Resources/Python.app/**/Python bin/python3.9; rm -rf Resources/Python.app
 install_name_tool -change @executable_path/../../../../Python3 @executable_path/../Python3 bin/python3.9; codesign -f -s - bin/python3.9
-cp -R usr/* ~/.local; mv Library ~/.local/opt/CLT; mv SDKs ~/.local/opt/CLT
+mv usr ~/.local/opt/CLT; mv Library ~/.local/opt/CLT; mv SDKs ~/.local/opt/CLT
 
 CC/CXX: clang/clang++ -isysroot ~/.local/opt/CLT/SDKs/MacOSX.sdk
 
