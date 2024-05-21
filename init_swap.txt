@@ -1,0 +1,4 @@
+sudo dd if=/dev/zero of=/swap.img bs=1024 count=4M
+sudo chmod 0600 /swap.img
+sudo mkswap /swap.img
+sudo echo "/swap.img none swap sw 0 0" >>/etc/fstab

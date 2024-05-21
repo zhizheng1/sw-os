@@ -1,0 +1,4 @@
+ln -sf /System/Library/Fonts/Supplemental/Arial* ~/.local/share/fonts
+echo '<fontconfig><dir>~/.local/share/fonts</dir><selectfont><rejectfont><glob>/System/*</glob><glob>/Library/*</glob></rejectfont></selectfont></fontconfig>' >~/.local/etc/fonts/fonts.conf
+
+echo "export FONTCONFIG_PATH=~/.local/etc/fonts" >>~/.zprofile

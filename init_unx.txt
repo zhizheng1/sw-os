@@ -1,0 +1,29 @@
+useradd -m -d /home/user user
+passwd user
+usermod -a -G sudo user
+
+sudo apt remove --purge snapd # remove all snap apps
+sudo apt-mark auto \*
+sudo apt install linux-generic-hwe-<LTS_VER> openssh-server zip unzip avahi-daemon
+sudo apt install bind9-dnsutils curl ed fdisk iproute2 iputils-ping lshw lsof netcat-openbsd netplan.io rsync sudo tcpdump time wpasupplicant xfsprogs
+sudo rm /etc/apt/apt.conf.d/20apt-esm-hook.conf
+sudo apt install samba cifs-utils apache2
+sudo systemctl disable smbd
+sudo systemctl disable apache2
+
+release upgrade: apt install ubuntu-standard update-manager-core
+
+sudo rm -rf /usr/local/*
+echo 'PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"' >/etc/environment
+
+sudo vi /etc/ssh/sshd_config
+    PermitRootLogin no
+sudo systemctl restart sshd
+sudo chmod -x /etc/update-motd.d/*
+
+sudo sh -c "echo LANG=en_US.UTF-8 >/etc/default/locale"
+timedatectl list-timezones
+sudo timedatectl set-timezone <timezone>
+
+ssh-copy-id -i ~/.ssh/id_rsa.pub user@host
+rsync -var --progress --delete <SRC> <DEST>
