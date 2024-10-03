@@ -1,7 +1,13 @@
 [zsh]
 https://zsh.sourceforge.io
+https://github.com/apple-oss-distributions/zsh/blob/main/Makefile
+https://packages.ubuntu.com/noble/zsh
 
-./configure --prefix=/usr --with-tcsetpgrp --enable-multibyte --enable-unicode9 --enable-max-function-depth=700
+sudo apt install libpcre2-dev
+Download Source Package zsh: [zsh_5.9-6ubuntu2.debian.tar.xz]
+patch -p1 <../cherry-pick-b62e91134-51723-migrate-pcre-module-to-pcre2.patch
+patch -p1 <../cherry-pick-10bdbd8b-51877-do-not-build-pcre-module-if-pcre2-config-is-not-found.patch
+./configure --prefix=/usr --with-tcsetpgrp --enable-multibyte --enable-unicode9 --enable-max-function-depth=700 --enable-pcre
 copy /etc/zshrc
 
 [nano]
